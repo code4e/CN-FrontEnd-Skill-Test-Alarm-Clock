@@ -25,20 +25,16 @@
         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
           <div class="btn-group me-2" role="group" aria-label="First group">
             <button type="button" class="btn btn-primary" id="clock-hour-container"></button>
-            <!-- <button type="button" class="btn btn-primary" id="clock-hour-container">2</button> -->
           </div>
           <div class="btn-group me-2" role="group" aria-label="Second group">
             <button type="button" class="btn btn-secondary" id="clock-minute-container"></button>
-            <!-- <button type="button" class="btn btn-secondary" id="minutes-2-container">6</button> -->
           </div>
           <div class="btn-group me-2" role="group" aria-label="Second group">
             <button type="button" class="btn btn-secondary" id="clock-second-container"></button>
-            <!-- <button type="button" class="btn btn-secondary">6</button> -->
           </div>
 
           <div class="btn-group me-2" role="group" aria-label="Second group" id="AM-PM-container">
             <button type="button" class="btn btn-secondary"></button>
-            <!-- <button type="button" class="btn btn-secondary">6</button> -->
           </div>
 
 
@@ -52,67 +48,74 @@
 
           <div class="btn-toolbar" id="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
 
-            <div class="btn-group me-2" role="group" aria-label="First group">
+            <div class="btn-group me-2 hours-container" role="group" aria-label="First group">
 
               <div class="set-alarm-digit-container">
-                <button class="increment"><span>+</span></button>
+                <button class="increment">+</button>
                 <button type="button" class="btn btn-primary" id="set-alarm-hour-1">0</button>
-                <button class="decrement"><span>-</span></button>
+                <button class="decrement">-</button>
               </div>
 
               <div class="set-alarm-digit-container">
-                <button class="increment"><span>+</span></button>
+                <button class="increment">+</button>
                 <button type="button" class="btn btn-primary" id="set-alarm-hour-2">0</button>
-                <button class="decrement"><span>-</span></button>
+                <button class="decrement">-</button>
               </div>
-              <!-- <button type="button" class="btn btn-primary">0</button> -->
+
             </div>
 
 
-            <div class="btn-group me-2" role="group" aria-label="Second group">
+            <div class="btn-group me-2 minutes-container" role="group" aria-label="Second group">
               <div class="set-alarm-digit-container">
-                <button class="increment"><span>+</span></button>
+                <button class="increment">+</button>
                 <button type="button" class="btn btn-primary" id="set-alarm-minutes-1">0</button>
-                <button class="decrement"><span>-</span></button>
+                <button class="decrement">-</button>
               </div>
               <div class="set-alarm-digit-container">
-                <button class="increment"><span>+</span></button>
+                <button class="increment">+</button>
                 <button type="button" class="btn btn-primary" id="set-alarm-minutes-2">0</button>
-                <button class="decrement"><span>-</span></button>
+                <button class="decrement">-</button>
               </div>
             </div>
 
 
-            <div class="btn-group me-2" role="group" aria-label="Third group">
+            <div class="btn-group me-2 seconds-container" role="group" aria-label="Third group">
               <div class="set-alarm-digit-container">
-                <button class="increment"><span>+</span></button>
+                <button class="increment">+</button>
                 <button type="button" class="btn btn-primary" id="set-alarm-second-1">0</button>
-                <button class="decrement"><span>-</span></button>
+                <button class="decrement">-</button>
               </div>
               <div class="set-alarm-digit-container">
-                <button class="increment"><span>+</span></button>
+                <button class="increment">+</button>
                 <button type="button" class="btn btn-primary" id="set-alarm-second-2">0</button>
-                <button class="decrement"><span>-</span></button>
+                <button class="decrement">-</button>
               </div>
             </div>
 
 
 
-            <div class="btn-group" role="group">
+            <div class="btn-group" id="AM-PM-dropdown" role="group">
               <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 AM
               </button>
-              <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+              <ul class="dropdown-menu" id="toggle-am-pm"aria-labelledby="btnGroupDrop1">
                 <li><a class="dropdown-item" href="#">PM</a></li>
               </ul>
+              <!-- <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select> -->
+
             </div>
+
+
+
 
             <div class="btn-group me-2" role="group" aria-label="Fourth group" id="set-alarm-button-container">
-              <button type="button" class="btn btn-success">Set Alarm</button>
+              <button type="button" class="btn btn-success" id="set-alarm-btn">Set Alarm</button>
             </div>
-
-
-
 
 
           </div>
@@ -125,28 +128,28 @@
           <h3>Alarms</h3>
           <ul class="list-group">
             <li class="list-group-item"><span>An item</span>
-                <button type="button" class="btn btn-danger">Danger</button>
+              <button type="button" class="btn btn-danger">Danger</button>
             </li>
             <li class="list-group-item"><span>An item</span>
-                <button type="button" class="btn btn-danger">Danger</button>
+              <button type="button" class="btn btn-danger">Danger</button>
             </li>
             <li class="list-group-item"><span>An item</span>
-                <button type="button" class="btn btn-danger">Danger</button>
+              <button type="button" class="btn btn-danger">Danger</button>
             </li>
             <li class="list-group-item"><span>An item</span>
-                <button type="button" class="btn btn-danger">Danger</button>
+              <button type="button" class="btn btn-danger">Danger</button>
             </li>
             <li class="list-group-item"><span>An item</span>
-                <button type="button" class="btn btn-danger">Danger</button>
+              <button type="button" class="btn btn-danger">Danger</button>
             </li>
             <li class="list-group-item"><span>An item</span>
-                <button type="button" class="btn btn-danger">Danger</button>
+              <button type="button" class="btn btn-danger">Danger</button>
             </li>
             <li class="list-group-item"><span>An item</span>
-                <button type="button" class="btn btn-danger">Danger</button>
+              <button type="button" class="btn btn-danger">Danger</button>
             </li>
             <li class="list-group-item"><span>An item</span>
-                <button type="button" class="btn btn-danger">Danger</button>
+              <button type="button" class="btn btn-danger">Danger</button>
             </li>
 
           </ul>
@@ -155,10 +158,6 @@
 
 
       </div>
-
-
-
-
 
 
 
