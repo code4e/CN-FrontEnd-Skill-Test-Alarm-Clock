@@ -7,23 +7,34 @@
     let setAlarmSeconds1 = document.getElementById("set-alarm-second-1");
     let setAlarmSeconds2 = document.getElementById("set-alarm-second-2");
     let setAlarmContainer = document.querySelector(".set-alarm-container");
-    // let currentHourValue = parseInt(setAlarmHours1.textContent + setAlarmsHours2.textContent);
     let AM_PM_Dropdown = document.getElementById("AM-PM-dropdown");
     let setAlarmBtn = document.getElementById("set-alarm-btn");
     let dropDown = document.getElementById("toggle-am-pm");
+    let alarmsList = document.getElementById("alarms-list");
 
 
-    //there were some extra white spaces and \n characters. So, use regex to remove those
+    //remove whites spaces and \n character from the AM-PM-dropdown
     document.querySelector("#AM-PM-dropdown button").textContent = document.querySelector("#AM-PM-dropdown button").textContent.replace(/\n/g, '').replace(/\s+/g, '');
     document.querySelector("#AM-PM-dropdown a").textContent = document.querySelector("#AM-PM-dropdown a").textContent.replace(/\n/g, '').replace(/\s+/g, '');
 
 
-    let alarmsCollection = [];
+    let alarmsCollection = {};
+
+    function generateId() {
+
+        return Math.random().toString(36).substring(2) +
+            (new Date()).getTime().toString(36);
+    }
+
+
+
 
     dropDown.addEventListener('click', function (e) {
         //swap AM/PM values
         let val1 = document.querySelector("#AM-PM-dropdown button").textContent.replace(/\n/g, '').replace(/\s+/g, '');
         let val2 = document.querySelector("#AM-PM-dropdown a").textContent.replace(/\n/g, '').replace(/\s+/g, '');
+
+
 
         document.querySelector("#AM-PM-dropdown button").textContent = val2;
         document.querySelector("#AM-PM-dropdown a").textContent = val1;
@@ -40,12 +51,47 @@
         let currentAMPMValue = document.querySelector("#AM-PM-dropdown button").textContent;
 
         // console.log(`The time is ${currentHourValue} : ${currentMinutesValue} : ${currentSecondsValue} ${currentAMPMValue}`);
-        let time = convertTimeTo24(`${currentHourValue}:${currentMinutesValue}:${currentSecondsValue} ${currentAMPMValue}`);
-        console.log(time);
+        let time = convertTimeTo24(`${currentHourValue}:${currentMinutesValue}:${currentSecondsValue} ${currentAMPMValue}`).toLocaleTimeString('en-US');
+
+        //add the alarm to the alarm collection array, only if the time string isn't already there
+        if (!isAlarmPresent(time)) {
+
+            //generate unique id to identify each alarm uniquely
+            let uid = generateId();
+
+            alarmsCollection[uid] = time;
+
+            //append the new alarm to the DOM
+            let newAlarmItemString = `<li class="list-group-item" id=${uid}><span>${time}</span>
+                                        <button type="button" class="btn btn-danger">Delete</button>
+                                      </li>`;
 
 
+
+            let temp = document.createElement('div');
+            temp.innerHTML = newAlarmItemString;
+            let newAlarmItemHTML = temp.firstChild;
+            alarmsList.appendChild(newAlarmItemHTML);
+
+
+            //attach delete event listener to the new alarm
+            newAlarmItemHTML.addEventListener('click', e => deleteAlarm(uid));
+
+        }else{
+            alert("Alarm already in the list, please create a different one");
+        }
 
     });
+
+
+    function deleteAlarm(uid) {
+
+        //remove from RAM
+        delete alarmsCollection[uid];
+
+        //remove from DOM
+        document.getElementById(uid).remove();
+    }
 
 
     setAlarmContainer.addEventListener('click', function (e) {
@@ -59,8 +105,10 @@
 
     function convertTimeTo24(time) {
         const realTime = time.split(" ");
-        // console.log(realTime);
+
         let alarmDateTime;
+
+
         if (realTime[1].toLowerCase() === "am") {
             alarmDateTime = realTime[0];
         } else {
@@ -69,14 +117,24 @@
             alarmDateTime = `${increaseHours}:${timeToReturn[1]}:${timeToReturn[2]}`;
         }
 
+        // console.log(alarmDateTime);
+
+
+        alarmDateTime = alarmDateTime.split(':');
         let now = new Date();
-        let nowDateTime = now.toISOString();
-        let nowDate = nowDateTime.split('T')[0];
-        let hms = alarmDateTime;
-        let target = new Date(nowDate + 'T' + hms);
+        return new Date(now.getFullYear(), now.getMonth(), now.getDate(), ...alarmDateTime);
 
-        return target;
+    }
 
+
+    function isAlarmPresent(time){
+
+        for (const id in alarmsCollection) {
+            if (Object.hasOwnProperty.call(alarmsCollection, id)) {
+                if(alarmsCollection[id] == time) return id;
+            }
+        }
+        return null;
     }
 
 
@@ -111,10 +169,22 @@
             let AM_PM_Container = document.getElementById("AM-PM-container");
 
             //set the value of current time in the DOM for the clock
-            clockHours.textContent = hoursIST_12HoursFormat;
-            clockMinutes.textContent = minutesIST;
-            clockSeconds.textContent = secondsIST;
+            clockHours.textContent = hoursIST_12HoursFormat < 10 ? ("0" + hoursIST_12HoursFormat) : hoursIST_12HoursFormat;
+            clockMinutes.textContent = minutesIST < 10 ? ("0" + minutesIST) : minutesIST;
+            clockSeconds.textContent = secondsIST < 10 ? ("0" + secondsIST) : secondsIST;
             AM_PM_Container.querySelector("button").textContent = am_pm;
+
+
+            // if (alarmsCollection.includes(ISTTime.toLocaleTimeString('en-US'))) {
+            //     alert("alarm goes off");
+            // }
+
+            let alarmUID = isAlarmPresent(ISTTime.toLocaleTimeString('en-US'));
+
+            if(alarmUID != null){
+                alert("Alarm goes off!!!!!");
+                deleteAlarm(alarmUID);
+            }
 
         }, 100);
     }
@@ -134,9 +204,9 @@
 
         //increment minutes part of the alarm
         else if (incrementElement.id == "set-alarm-minutes-1") {
-            setTimeRange(incrementElement, true, 6);
+            setTimeRange(incrementElement, true, 5);
         } else if (incrementElement.id == "set-alarm-minutes-2") {
-            setTimeRange(incrementElement, true, (setAlarmMinutes1.textContent == "6" ? 0 : 9));
+            setTimeRange(incrementElement, true, 9);
         }
 
         //increment seconds part of the alarm
