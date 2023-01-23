@@ -1,0 +1,68 @@
+body{
+    height : 100%;
+    width: 100vh;
+    background-color: aquamarine;
+}
+.card{
+    min-height : 20vh;
+    margin: 20px;
+    /* display: flex !important; */
+}
+.clock-container, .set-alarm-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.alarms-container{
+    margin-top: 50px;
+}
+.set-alarm-digit-container{
+    display: flex;
+    flex-direction: column;
+}
+#btn-toolbar{
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+}
+
+.set-alarm-digit-container{
+   
+}
+
+.increment, .decrement{
+    height: 15px;
+    /* vertical-align: middle; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#set-alarm-button-container{
+    margin-left: 10px;
+}
+
+#alarms-list-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0;
+}
+
+#alarms-list-container h3{
+    margin-top: 30px;
+}
+
+#alarms-list-container ul{
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin-left: 0;
+}
+
+#alarms-list-container ul li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
