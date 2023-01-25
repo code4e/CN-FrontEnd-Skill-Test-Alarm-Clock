@@ -20,11 +20,8 @@
 
     let alarmsCollection = {};
 
-    function generateId() {
-
-        return Math.random().toString(36).substring(2) +
-            (new Date()).getTime().toString(36);
-    }
+    let generateId = () => Math.random().toString(36).substring(2) + (new Date()).getTime().toString(36);
+    
 
 
 
@@ -44,13 +41,11 @@
 
     setAlarmBtn.addEventListener('click', function (e) {
         e.preventDefault();
-        // console.log("add new alarm");
         let currentHourValue = parseInt(setAlarmHours1.textContent + setAlarmsHours2.textContent);
         let currentMinutesValue = parseInt(setAlarmMinutes1.textContent + setAlarmMinutes2.textContent);
         let currentSecondsValue = parseInt(setAlarmSeconds1.textContent + setAlarmSeconds2.textContent);
         let currentAMPMValue = document.querySelector("#AM-PM-dropdown button").textContent;
 
-        // console.log(`The time is ${currentHourValue} : ${currentMinutesValue} : ${currentSecondsValue} ${currentAMPMValue}`);
         let time = convertTimeTo24(`${currentHourValue}:${currentMinutesValue}:${currentSecondsValue} ${currentAMPMValue}`).toLocaleTimeString('en-US');
 
         //add the alarm to the alarm collection array, only if the time string isn't already there
@@ -116,10 +111,6 @@
             const increaseHours = Number(timeToReturn[0]) + 12;
             alarmDateTime = `${increaseHours}:${timeToReturn[1]}:${timeToReturn[2]}`;
         }
-
-        // console.log(alarmDateTime);
-
-
         alarmDateTime = alarmDateTime.split(':');
         let now = new Date();
         return new Date(now.getFullYear(), now.getMonth(), now.getDate(), ...alarmDateTime);
@@ -128,7 +119,6 @@
 
 
     function isAlarmPresent(time){
-
         for (const id in alarmsCollection) {
             if (Object.hasOwnProperty.call(alarmsCollection, id)) {
                 if(alarmsCollection[id] == time) return id;
@@ -173,11 +163,6 @@
             clockMinutes.textContent = minutesIST < 10 ? ("0" + minutesIST) : minutesIST;
             clockSeconds.textContent = secondsIST < 10 ? ("0" + secondsIST) : secondsIST;
             AM_PM_Container.querySelector("button").textContent = am_pm;
-
-
-            // if (alarmsCollection.includes(ISTTime.toLocaleTimeString('en-US'))) {
-            //     alert("alarm goes off");
-            // }
 
             let alarmUID = isAlarmPresent(ISTTime.toLocaleTimeString('en-US'));
 
