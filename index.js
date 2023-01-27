@@ -117,7 +117,7 @@
 
     }
 
-
+    //fn to see if the alarm time is aldready present
     function isAlarmPresent(time){
         for (const id in alarmsCollection) {
             if (Object.hasOwnProperty.call(alarmsCollection, id)) {
